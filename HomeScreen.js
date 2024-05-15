@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'; 
+import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const HomeScreen = ({ navigation }) => {
   return (
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
       <View style={styles.titleBar}>
         <Text style={styles.titleText}>Welcome to Women's Safety App</Text>
@@ -128,6 +129,7 @@ const HomeScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
     </View>
+    </ScrollView>
   );
 };
 
