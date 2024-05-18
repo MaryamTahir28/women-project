@@ -4,10 +4,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const HomeScreen = ({ navigation }) => {
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
+    <ScrollView contentContainerStyle={styles.scrollViewContent}>
     <View style={styles.container}>
       <View style={styles.titleBar}>
-        <Text style={styles.titleText}>Welcome to Women's Safety App</Text>
+        <Text style={styles.titleText}>"Welcome to Women's Safety App"</Text>
       </View>
 
       <View style={styles.buttonRow}>
@@ -136,10 +136,10 @@ const HomeScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingTop: 20,
+    paddingBottom: 120,
   },
   titleBar: {
     backgroundColor: 'pink',
@@ -149,9 +149,11 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 19,
     color: 'white',
     textAlign: 'center',
+    fontFamily: 'serif',
+    fontStyle: 'italic',
   },
   buttonRow: {
     flexDirection: 'row',
@@ -245,10 +247,12 @@ const styles = StyleSheet.create({
   footerBar: {
     position: 'absolute',
     bottom: 0,
+    left: 0,
+    right: 0,
     flexDirection: 'row',
-    width: '100%',
-    backgroundColor: 'pink',
     justifyContent: 'space-evenly',
+    backgroundColor: 'pink',
+    paddingTop: 10,
   },
   footerButton: {
     padding: 15,
@@ -271,7 +275,7 @@ const styles = StyleSheet.create({
     borderWidth: 6,
     padding: 10,
     position: 'relative', 
-    top: -30,
+    top: -40,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.50,

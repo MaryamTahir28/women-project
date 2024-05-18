@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: '#FFFFFF',
+    fontFamily: 'serif',
   },
   container: {
     flex: 1,

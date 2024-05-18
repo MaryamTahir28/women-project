@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         borderColor: 'pink',
         borderWidth: 2,
+        fontFamily: 'serif',
     },
     inputContainer: {
         flexDirection: 'row',

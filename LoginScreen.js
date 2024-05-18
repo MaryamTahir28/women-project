@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     padding: 10,
     alignSelf: 'stretch',
     textAlign: 'center',
+    fontFamily: 'serif',
   },
   logo: {
     width: 100,

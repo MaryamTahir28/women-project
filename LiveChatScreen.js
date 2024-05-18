@@ -15,17 +15,15 @@ const LiveChatScreen = ({ navigation }) => {
             <Text style={styles.title}>Emergency Help Chat</Text>
             <View style={styles.inputContainer}>
                 <Text style={styles.subjectLabel}>Subject:</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Emergency Help"
+                    placeholderTextColor="#800080"
+                    value={message}
+                    onChangeText={setMessage}
+                    autoCapitalize="none"
+                />
             </View>
-            {/* Display TextInput for "Emergency Help" */}
-            <TextInput
-                style={styles.input}
-                placeholder="Emergency Help"
-                placeholderTextColor="plum"
-                value={message}
-                onChangeText={setMessage}
-                autoCapitalize="none"
-                backgroundColor="white"
-            />
             {/* Display TextInput for assistant message */}
             <TextInput
                 style={[styles.input, styles.assistantInput]}
@@ -34,7 +32,6 @@ const LiveChatScreen = ({ navigation }) => {
                 value={assistantMessage}
                 onChangeText={setAssistantMessage}
                 autoCapitalize="none"
-                backgroundColor="white"
                 textAlignVertical="top"
             />
             {/* Start Chat button */}
@@ -62,18 +59,19 @@ const styles = StyleSheet.create({
         borderColor: 'pink',
         borderWidth: 1,
         padding: 10,
-        width: '100%', 
+        width: '100%',
         textAlign: 'center',
+        fontFamily: 'serif',
     },
     inputContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        width: '100%',
+        marginBottom: 10,
     },
     subjectLabel: {
         fontSize: 16,
         fontWeight: 'bold',
         color: '#800080',
-        marginRight: 10,
+        marginBottom: 5,
     },
     input: {
         height: 40,
@@ -82,11 +80,11 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 10,
         color: '#800080',
-        marginBottom: 10,
-        width: '100%', 
+        width: '100%',
+        backgroundColor: '#FFF9FA',
     },
     assistantInput: {
-        height: 200, 
+        height: 200,
     },
     startChatButton: {
         backgroundColor: 'pink',
@@ -95,7 +93,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginTop: 20,
         shadowColor: "#000",
-        shadowOffset: { width: 5, },
+        shadowOffset: { width: 5 },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,

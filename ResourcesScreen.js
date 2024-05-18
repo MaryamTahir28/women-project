@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, SectionList, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, SectionList, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -11,7 +11,7 @@ const ResourcesScreen = ({ navigation }) => {
         { type: 'Lawyers', data: [{ name: 'Rafique Aslam', number: '123-456-7890' }, { name: 'Waqas Ali', number: '987-654-3210' }] },
         { type: 'Therapists', data: [{ name: 'Saba Tahir', number: '456-789-0123' }, { name: 'Imran Saleem', number: '321-654-0987' }] },
         { type: 'Psychiatrists', data: [{ name: 'Abdul Mateen', number: '789-012-3456' }, { name: 'Waseem Akram', number: '654-321-9870' }] },
-        { type: 'Women Empowerment NGOs', data: [{ name: 'EmpowerWomen Lahore', number: '012-345-6789' }, { name: 'WomenSupport Lahore', number: '789-012-3456' ,}] }
+        { type: 'Women Empowerment NGOs', data: [{ name: 'EmpowerWomen Lahore', number: '012-345-6789' }, { name: 'WomenSupport Lahore', number: '789-012-3456' }] }
       ]
     },
     {
@@ -59,49 +59,23 @@ const ResourcesScreen = ({ navigation }) => {
     </View>
   );
 
-  const renderSectionHeader = ({ section: { city, data } }) => (
+  const renderSectionHeader = ({ section: { city } }) => (
     <View style={styles.sectionHeader}>
       <Text style={styles.city}>{city}</Text>
-      {data.map((resource, index) => (
-        <View key={index}>
-          <Text style={styles.resourceType}>{resource.type}</Text>
-          {resource.data.map((item, index) => (
-            <View key={index} style={styles.resourceItem}>
-              <Text style={styles.resourceItemText}>{item.name}</Text>
-              <Text style={styles.resourceItemText}>{item.number}</Text>
-            </View>
-          ))}
+    </View>
+  );
+
+  const renderResourceType = ({ item }) => (
+    <View>
+      <Text style={styles.resourceType}>{item.type}</Text>
+      {item.data.map((resource, index) => (
+        <View key={index} style={styles.resourceItem}>
+          <Text style={styles.resourceItemText}>{resource.name}</Text>
+          <Text style={styles.resourceItemText}>{resource.number}</Text>
         </View>
       ))}
     </View>
   );
-
-  // const renderSectionHeader = ({ section: { city, data } }) => (
-  //   <View style={styles.sectionHeader}>
-  //     <Text style={styles.city}>{city}</Text>
-  //     {data.map((resource, index) => (
-  //       <View key={index}>
-  //         <Text style={styles.resourceType}>{resource.type}</Text>
-  //         {resource.data.map((item, index) => (
-  //           <View key={index} style={styles.resourceItem}>
-  //             <Text style={styles.resourceItemText}>{item.name}</Text>
-  //             <Text style={styles.resourceItemText}>{item.number}</Text>
-  //           </View>
-  //         ))}
-  //         {/* Render the next section immediately after the last item of the current section */}
-  //         {index === data.length - 1 && (
-  //           <View style={styles.sectionHeader}>
-  //             {/* Check if there's a next section */}
-  //             {resourcesData[index + 1] && (
-  //               <Text style={styles.city}>{resourcesData[index + 1].city}</Text>
-  //             )}
-  //           </View>
-  //         )}
-  //       </View>
-  //     ))}
-  //   </View>
-  // );
-  
 
   return (
     <View style={styles.container}>
@@ -111,7 +85,7 @@ const ResourcesScreen = ({ navigation }) => {
       <SectionList
         sections={resourcesData}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={renderItem}
+        renderItem={({ item }) => renderResourceType({ item })}
         renderSectionHeader={renderSectionHeader}
       />
     </View>
@@ -128,17 +102,15 @@ const styles = StyleSheet.create({
     width: '106%',
     alignItems: 'center',
     paddingVertical: 10,
-    //paddingHorizontal: 10,
     marginLeft: -10,
-    //marginRight: -10,
   },
   title: {
     fontSize: 23,
     fontWeight: 'bold',
     color: 'white',
+    fontFamily: 'serif',
   },
   sectionHeader: {
-    paddingHorizontal: -5,
     marginBottom: 10,
   },
   city: {
@@ -149,18 +121,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#800080', 
     paddingVertical: 10,
     paddingHorizontal: 5,
-    borderRadius: 1,
     textAlign: 'center', 
   },
   resourceType: {
-    fontSize: 17,
+    fontSize: 16,
     fontWeight: 'bold',
-    marginTop: 1,
+    marginTop: -5,
     color: 'white', 
     backgroundColor: '#ffb6c1', 
     paddingVertical: 5,
     paddingHorizontal: 10,
-    borderRadius: 1,
     textAlign: 'center',
   },
   resourceItem: {
@@ -169,7 +139,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between', 
     borderBottomWidth: 1, 
-    borderBottomColor: 'lightgray', 
+    borderBottomColor: 'lightgray',
+    backgroundColor: 'white', 
   },
   resourceItemText: {
     color: '#800080',
