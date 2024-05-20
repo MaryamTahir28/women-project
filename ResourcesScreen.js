@@ -1,9 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, SectionList, Dimensions } from 'react-native';
+import { useTheme } from '../ThemeContext';
 
 const { width } = Dimensions.get('window');
 
 const ResourcesScreen = ({ navigation }) => {
+  const { darkMode } = useTheme();
+
   const resourcesData = [
     {
       city: 'Lahore',
@@ -53,34 +56,34 @@ const ResourcesScreen = ({ navigation }) => {
   ];
 
   const renderItem = ({ item }) => (
-    <View style={styles.resourceItem}>
-      <Text style={styles.resourceItemText}>{item.name}</Text>
-      <Text style={styles.resourceItemText}>{item.number}</Text>
+    <View style={[styles.resourceItem, { backgroundColor: darkMode ? '#333333' : '#FFFFFF' }]}>
+      <Text style={[styles.resourceItemText, { color: darkMode ? '#FFFFFF' : '#800080' }]}>{item.name}</Text>
+      <Text style={[styles.resourceItemText, { color: darkMode ? '#FFFFFF' : '#800080' }]}>{item.number}</Text>
     </View>
   );
 
   const renderSectionHeader = ({ section: { city } }) => (
-    <View style={styles.sectionHeader}>
-      <Text style={styles.city}>{city}</Text>
+    <View style={[styles.sectionHeader, { backgroundColor: darkMode ? '#800080' : '#800080' }]}>
+      <Text style={[styles.city, { color: darkMode ? '#FFFFFF' : '#FFFFFF' }]}>{city}</Text>
     </View>
   );
 
   const renderResourceType = ({ item }) => (
     <View>
-      <Text style={styles.resourceType}>{item.type}</Text>
+      <Text style={[styles.resourceType, { backgroundColor: darkMode ? '#FF80AB' : '#ffb6c1', color: darkMode ? '#FFFFFF' : '#FFFFFF' }]}>{item.type}</Text>
       {item.data.map((resource, index) => (
-        <View key={index} style={styles.resourceItem}>
-          <Text style={styles.resourceItemText}>{resource.name}</Text>
-          <Text style={styles.resourceItemText}>{resource.number}</Text>
+        <View key={index} style={[styles.resourceItem, { backgroundColor: darkMode ? '#333333' : '#FFFFFF' }]}>
+          <Text style={[styles.resourceItemText, { color: darkMode ? '#FFFFFF' : '#800080' }]}>{resource.name}</Text>
+          <Text style={[styles.resourceItemText, { color: darkMode ? '#FFFFFF' : '#800080' }]}>{resource.number}</Text>
         </View>
       ))}
     </View>
   );
 
   return (
-    <View style={styles.container}>
-      <View style={styles.titleBar}>
-        <Text style={styles.title}>Resource List</Text>
+    <View style={[styles.container, { backgroundColor: darkMode ? '#121212' : '#FFFFFF' }]}>
+      <View style={[styles.titleBar, { backgroundColor: darkMode ? 'pink' : 'pink' }]}>
+        <Text style={[styles.title, { color: darkMode ? '#FFFFFF' : '#FFFFFF' }]}>Resource List</Text>
       </View>
       <SectionList
         sections={resourcesData}
@@ -98,7 +101,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   titleBar: {
-    backgroundColor: 'pink', 
     width: '106%',
     alignItems: 'center',
     paddingVertical: 10,
@@ -107,7 +109,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 23,
     fontWeight: 'bold',
-    color: 'white',
     fontFamily: 'serif',
   },
   sectionHeader: {
@@ -117,18 +118,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginTop: 5,
-    color: 'white',
-    backgroundColor: '#800080', 
     paddingVertical: 10,
     paddingHorizontal: 5,
-    textAlign: 'center', 
+    textAlign: 'center',
   },
   resourceType: {
     fontSize: 16,
     fontWeight: 'bold',
     marginTop: -5,
-    color: 'white', 
-    backgroundColor: '#ffb6c1', 
     paddingVertical: 5,
     paddingHorizontal: 10,
     textAlign: 'center',
@@ -140,7 +137,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between', 
     borderBottomWidth: 1, 
     borderBottomColor: 'lightgray',
-    backgroundColor: 'white', 
   },
   resourceItemText: {
     color: '#800080',

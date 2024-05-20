@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Switch, ScrollView, Alert, ActivityIndicator, Modal } from 'react-native';
+import { useTheme } from '../ThemeContext';
 
 const SettingsScreen = ({ navigation }) => {
+  const { darkMode, toggleTheme } = useTheme();
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleClearCache = () => {
@@ -29,7 +30,6 @@ const SettingsScreen = ({ navigation }) => {
             setLoading(true); 
             setTimeout(() => {
               setLoading(false);
-              // Your delete account logic here
               Alert.alert('Deleted', 'Your account has been deleted.');
             }, 2000);
           },
@@ -39,28 +39,28 @@ const SettingsScreen = ({ navigation }) => {
     );
   };
   
-  
+  const themeStyles = darkMode ? darkTheme : lightTheme;
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={[styles.container, themeStyles.container]}>
       <View style={styles.titleBar}>
         <Text style={styles.titleText}>Settings</Text>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Profile</Text>
-        <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Profile')}>
-          <Text style={styles.itemText}>Edit Profile</Text>
+        <Text style={[themeStyles.sectionTitle, styles.sectionTitle]}>Profile</Text>
+        <TouchableOpacity style={[styles.item, themeStyles.item]} onPress={() => navigation.navigate('Profile')}>
+          <Text style={themeStyles.itemText}>Edit Profile</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('ChangePassword')}>
-          <Text style={styles.itemText}>Change Password</Text>
+        <TouchableOpacity style={[styles.item, themeStyles.item]} onPress={() => navigation.navigate('ChangePassword')}>
+          <Text style={themeStyles.itemText}>Change Password</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Preferences</Text>
-        <View style={styles.item}>
-          <Text style={styles.itemText}>Notifications</Text>
+        <Text style={[themeStyles.sectionTitle, styles.sectionTitle]}>Preferences</Text>
+        <View style={[styles.item, themeStyles.item]}>
+          <Text style={themeStyles.itemText}>Notifications</Text>
           <Switch 
             value={notificationsEnabled} 
             onValueChange={setNotificationsEnabled} 
@@ -68,62 +68,62 @@ const SettingsScreen = ({ navigation }) => {
             trackColor={{ false: 'plum', true: 'pink' }}
           />
         </View>
-        <View style={styles.item}>
-          <Text style={styles.itemText}>Dark Mode</Text>
+        <View style={[styles.item, themeStyles.item]}>
+          <Text style={themeStyles.itemText}>Dark Mode</Text>
           <Switch 
             value={darkMode} 
-            onValueChange={setDarkMode} 
+            onValueChange={toggleTheme} 
             thumbColor={darkMode ? 'pink' : 'plum'}
             trackColor={{ false: 'plum', true: 'pink' }}
           />
         </View>
-        <TouchableOpacity style={styles.item}>
-          <Text style={styles.itemText}>Language</Text>
+        <TouchableOpacity style={[styles.item, themeStyles.item]}>
+          <Text style={themeStyles.itemText}>Language</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Data</Text>
-        <TouchableOpacity style={styles.item} onPress={handleClearCache}>
-          <Text style={styles.itemText}>Clear Cache</Text>
+        <Text style={[themeStyles.sectionTitle, styles.sectionTitle]}>Data</Text>
+        <TouchableOpacity style={[styles.item, themeStyles.item]} onPress={handleClearCache}>
+          <Text style={themeStyles.itemText}>Clear Cache</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.item} onPress={handleDeleteAccount}>
-          <Text style={styles.itemText}>Delete Account</Text>
+        <TouchableOpacity style={[styles.item, themeStyles.item]} onPress={handleDeleteAccount}>
+          <Text style={themeStyles.itemText}>Delete Account</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.item}>
-          <Text style={styles.itemText}>Logout Account</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Support</Text>
-        <TouchableOpacity style={styles.item}>
-          <Text style={styles.itemText}>FAQ</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.item}>
-          <Text style={styles.itemText}>Contact Support</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.item}>
-          <Text style={styles.itemText}>Feedback</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.item}>
-          <Text style={styles.itemText}>Report a Problem</Text>
+        <TouchableOpacity style={[styles.item, themeStyles.item]}>
+          <Text style={themeStyles.itemText}>Logout Account</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>About</Text>
-        <TouchableOpacity style={styles.item}>
-          <Text style={styles.itemText}>Terms of Service</Text>
+        <Text style={[themeStyles.sectionTitle, styles.sectionTitle]}>Support</Text>
+        <TouchableOpacity style={[styles.item, themeStyles.item]}>
+          <Text style={themeStyles.itemText}>FAQ</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.item}>
-          <Text style={styles.itemText}>Privacy Policy</Text>
+        <TouchableOpacity style={[styles.item, themeStyles.item]}>
+          <Text style={themeStyles.itemText}>Contact Support</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('AppVersion')}>
-          <Text style={styles.itemText}>App Version</Text>
+        <TouchableOpacity style={[styles.item, themeStyles.item]}>
+          <Text style={themeStyles.itemText}>Feedback</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('AboutApp')}>
-          <Text style={styles.itemText}>About the App</Text>
+        <TouchableOpacity style={[styles.item, themeStyles.item]}>
+          <Text style={themeStyles.itemText}>Report a Problem</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.section}>
+        <Text style={[themeStyles.sectionTitle, styles.sectionTitle]}>About</Text>
+        <TouchableOpacity style={[styles.item, themeStyles.item]} onPress={() => navigation.navigate('TermsOfService')}>
+          <Text style={themeStyles.itemText}>Terms of Service</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.item, themeStyles.item]} onPress={() => navigation.navigate('PrivacyPolicy')}>
+          <Text style={themeStyles.itemText}>Privacy Policy</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.item, themeStyles.item]} onPress={() => navigation.navigate('AppVersion')}>
+          <Text style={themeStyles.itemText}>App Version</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.item, themeStyles.item]} onPress={() => navigation.navigate('AboutApp')}>
+          <Text style={themeStyles.itemText}>About the App</Text>
         </TouchableOpacity>
       </View>
 
@@ -143,6 +143,38 @@ const SettingsScreen = ({ navigation }) => {
     </ScrollView>
   );
 };
+
+const lightTheme = StyleSheet.create({
+  container: {
+    backgroundColor: '#ffffff',
+  },
+  sectionTitle: {
+    color: '#701C78',
+  },
+  item: {
+    backgroundColor: 'white',
+  },
+  itemText: {
+    color: '#800080',
+    fontSize: 16, 
+  },
+});
+
+const darkTheme = StyleSheet.create({
+  container: {
+    backgroundColor: '#121212',
+  },
+  sectionTitle: {
+    color: '#800080',
+  },
+  item: {
+    backgroundColor: '#1f1f1f',
+  },
+  itemText: {
+    color: 'pink',
+    fontSize: 16,
+  },
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -168,7 +200,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginHorizontal: 20,
     marginBottom: 10,
-    color: '#701C78',
   },
   item: {
     backgroundColor: 'white',
@@ -182,6 +213,9 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 16,
     color: '#800080',
+  },
+  boldText: {
+    fontWeight: 'bold',
   },
   modalBackground: {
     flex: 1,

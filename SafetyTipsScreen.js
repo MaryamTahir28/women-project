@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, Text, SectionList, StyleSheet } from 'react-native';
+import { useTheme } from '../ThemeContext';
 
 const SafetyTipsScreen = () => {
+  const { darkMode } = useTheme();
+
   const DATA = [
     {
       title: "Personal Safety",
@@ -69,21 +72,21 @@ const SafetyTipsScreen = () => {
   ];
 
   const renderItem = ({ item }) => (
-    <View style={styles.item}>
-      <Text style={styles.title}>{item}</Text>
+    <View style={[styles.item, { backgroundColor: darkMode ? '#333333' : '#FFFFFF' }]}>
+      <Text style={[styles.title, { color: darkMode ? '#FFFFFF' : '#800080' }]}>{item}</Text>
     </View>
   );
 
   const renderSectionHeader = ({ section: { title } }) => (
-    <View style={styles.header}>
-      <Text style={styles.headerText}>{title}</Text>
+    <View style={[styles.header, { backgroundColor: darkMode ? '#800080' : '#800080' }]}>
+      <Text style={[styles.headerText, { color: darkMode ? '#FFFFFF' : '#FFFFFF' }]}>{title}</Text>
     </View>
   );
 
   return (
-    <View style={styles.screen}>
-      <View style={styles.titleBar}>
-        <Text style={styles.titleBarText}>Safety Tips</Text>
+    <View style={[styles.screen, { backgroundColor: darkMode ? '#121212' : '#FFFFFF' }]}>
+      <View style={[styles.titleBar, { backgroundColor: darkMode ? 'pink' : '#FFC0CB' }]}>
+        <Text style={[styles.titleBarText, { color: darkMode ? '#FFFFFF' : '#FFFFFF' }]}>Safety Tips</Text>
       </View>
       <SectionList
         sections={DATA}
@@ -101,7 +104,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   titleBar: {
-    backgroundColor: '#FFC0CB',
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -109,7 +111,6 @@ const styles = StyleSheet.create({
   titleBarText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#FFFFFF',
     fontFamily: 'serif',
   },
   container: {
@@ -117,7 +118,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   header: {
-    backgroundColor: '#800080',
     padding: 10,
     borderTopWidth: 1,
     borderBottomWidth: 1,
@@ -129,18 +129,15 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#FFFFFF',
     textAlign: 'center'
   },
   item: {
-    backgroundColor: '#FFFFFF',
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#cccccc',
   },
   title: {
     fontSize: 16,
-    color: '#800080',
   }
 });
 

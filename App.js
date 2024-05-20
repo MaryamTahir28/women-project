@@ -11,13 +11,14 @@ import ResourcesScreen from './screens/ResourcesScreen';
 import LiveChatScreen from './screens/LiveChatScreen';
 import AppVersionScreen from './screens/AppVersion';
 import AboutApp from './screens/AboutApp';
-
+import { ThemeProvider, useTheme } from './ThemeContext';
 
 const Stack = createStackNavigator();
 
-function App() {
+const App = () => {
+  const { darkMode } = useTheme();
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={darkMode ? darkTheme : lightTheme}>
       <Stack.Navigator
         initialRouteName="Login"
         screenOptions={{
@@ -47,6 +48,34 @@ function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
-export default App;
+const AppWrapper = () => (
+  <ThemeProvider>
+    <App />
+  </ThemeProvider>
+);
+
+export default AppWrapper;
+
+const lightTheme = {
+  dark: false,
+  colors: {
+    primary: '#f4511e',
+    background: '#ffffff',
+    card: '#f4511e',
+    text: '#000000',
+    border: '#f4511e',
+  },
+};
+
+const darkTheme = {
+  dark: true,
+  colors: {
+    primary: '#f4511e',
+    background: '#000000',
+    card: '#f4511e',
+    text: '#ffffff',
+    border: '#f4511e',
+  },
+};
